@@ -1,0 +1,57 @@
+.upload-list {
+  &.upload-list-picture-card {
+    display: flex;
+
+    .upload-list-item-card {
+      position: relative;
+
+      &:hover {
+        background: transparent;
+      }
+
+      &::before {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: all .3s;
+        content: ' ';
+      }
+
+      >img {
+        width: 104px;
+        height: 104px;
+      }
+      .upload-list-item-actions {
+        display: none;
+      }
+      &:hover {
+        .upload-list-item-actions {
+          display: block;
+          position: absolute;
+          // left: 50%;
+          // top: 50%;
+          transform: translate(50%, -50%);
+          line-height: 0;
+          right: 0px;
+          top: 0px;
+        }
+
+        .anticon-delete {
+          font-size: 20px;
+          background: url('./delete.png') center no-repeat !important;
+          background-size: contain !important;
+          color: transparent !important;
+          border-radius: 100%;
+          width: 20px;
+          cursor: pointer;
+          &:before {
+            content: "\E62E";
+          }
+        }
+      }
+    }
+  }
+}
