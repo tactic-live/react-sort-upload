@@ -5,18 +5,24 @@ import PropTypes from 'prop-types';
 import SortedUpload from './SortedUpload';
 
 class UploadImg extends React.Component {
-  fileList = [];
-  selectedFileList = [];
-  uploadError = false;
-  // 上传校验完成
-  uploadCheckFlag = false;
-  uploadCheckCount = 0;
-  state = {
-    test: false
-  };
+  constructor(props) {
+    super(props);
+    this.fileList = [];
+    this.selectedFileList = [];
+    this.uploadError = false;
+    // 上传校验完成
+    this.uploadCheckFlag = false;
+    this.uploadCheckCount = 0;
+    this.state = {
+      test: false
+    };
+    this.beforeUpload = this.beforeUpload.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onRemove = this.onRemove.bind(this);
+  }
 
   // 上传商品图片前
-  beforeUpload = async (file, selectedFileList) => {
+  async beforeUpload(file, selectedFileList) {
     const { beforeUpload } = this.props;
     const { fileList } = this;
     this.uploadError = false;
@@ -63,7 +69,7 @@ class UploadImg extends React.Component {
     this.fileList = fileList;
   }
 
-  onChange = (e) => {
+  onChange(e) {
     const { onChange } = this.props;
     const { file, fileList } = e;
     const { status, response } = file;
@@ -80,17 +86,15 @@ class UploadImg extends React.Component {
       });
     }
     if (status == 'done' || status == 'error') {
-      onChange && onChange({
-        ...e,
-        fileList: this.fileList.map(fileItem => fileList.find(eFile => fileItem.uid == eFile.uid))
-      });
+      const tempObj = Object.assign({}, e, {fileList: this.fileList.map(fileItem => fileList.find(eFile => fileItem.uid == eFile.uid))});
+      onChange && onChange(tempObj);
     }
     this.setState({
       test: !this.state.test
     });
   }
 
-  onRemove = (file) => {
+  onRemove(file) {
     const { uid, percent } = file;
     const index = this.fileList.findIndex(item => item.uid == uid);
     this.fileList.splice(index, 1);
@@ -104,7 +108,7 @@ class UploadImg extends React.Component {
 
   render() {
     const {
-      className, onSorted, fileList, onRemove, ...rest
+      className, onSorted, fileList, onRemove
     } = this.props;
     const cls = `parampic-uploader ${className}`;
     let result;
@@ -116,7 +120,7 @@ class UploadImg extends React.Component {
           multiple
           listType="picture-card"
           accept="image/*"
-          {...rest}
+          {...this.props}
           fileList={this.fileList}
           onChange={this.onChange}
           beforeUpload={this.beforeUpload}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Upload as AntdUpload } from 'antd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import './style.less';
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -13,12 +12,15 @@ const reorder = (list, startIndex, endIndex) => {
 
 const grid = 0;
 
-const getItemStyle = (isDragging, draggableStyle) => ({
-  userSelect: 'none',
-  padding: grid * 2,
-  margin: `0 16px 20px 0`,
-  ...draggableStyle,
-});
+const getItemStyle = (isDragging, draggableStyle) => {
+  const sty = {
+    userSelect: 'none',
+    padding: grid * 2,
+    margin: `0 16px 20px 0`
+  };
+  const result = Object.assign({}, sty, draggableStyle);
+  return result;
+}
 
 const getListStyle = (isDraggingOver, listLength = 0) => ({
   display: 'flex',
@@ -26,11 +28,16 @@ const getListStyle = (isDraggingOver, listLength = 0) => ({
 });
 
 class Upload extends React.Component {
-  state = {
-    fileList: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+      fileList: [],
+    }
+    this.onDragEnd = this.onDragEnd.bind(this);
+    this.onRemove = this.onRemove.bind(this);
   }
 
-  onDragEnd = (result) => {
+  onDragEnd(result) {
     // dropped outside the list
     const { onSorted } = this.props;
     if (!result.destination) {
@@ -54,7 +61,7 @@ class Upload extends React.Component {
       fileList
     })
   }
-  onRemove = (file) => {
+  onRemove(file) {
     const { onRemove } = this.props;
     return onRemove && onRemove(file);
   }
