@@ -5,7 +5,7 @@
   "main": "dist/react-sort-upload.js",
   "scripts": {
     "watch": "babel src --out-dir lib --watch",
-    "build": "rollup -c",
+    "build": "rollup -c && npm run build-less && npm run build-less-min",
     "test": "yarn build && mocha",
     "build-less": "lessc -js --source-map src/style/style.less dist/react-sort-upload.css",
     "build-less-min": "lessc -js --source-map --clean-css=\"compatibility=*\" src/style/style.less dist/react-sort-upload.min.css",

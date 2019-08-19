@@ -115,7 +115,7 @@ export default [
       format: 'umd',
       name: 'react-asd',
       extend: true,
-      file: 'dist/index.js',
+      file: 'dist/react-sort-upload.js',
       // exports: 'named' // 导出模式 named:导出多个东西 default: 仅仅导出一个东西
     }
   }),
@@ -125,7 +125,7 @@ export default [
       format: 'umd',
       name: 'react-asd',
       extend: true,
-      file: 'dist/index.min.js'
+      file: 'dist/react-sort-upload.min.js'
     }
   })
 ];
