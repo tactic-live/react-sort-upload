@@ -7,8 +7,11 @@
 $ npm install react-sort-upload --save
 ```
 
-## devDependencies
-React ```>= 15.6.1``` , React DOM ``` >= 15.6.1 ```, antd ``` 3.15.0 ``` .
+## dependencies
+es6-promise ``` 4.1.0 ```, prop-types ``` ^15.5.7 ```, react-beautiful-dnd ``` >= 8.0.0 ``` .
+
+## peerDependencies
+React ```>= 15.3.0``` , React DOM ``` >= 15.3.0 ```, antd ``` >= 3.0.0 ``` .
 
 ## Usage
 
@@ -33,9 +36,9 @@ import UploadImg from 'react-sort-upload';
 ------
 
 ## Props
-Name|Type|Default|Description
+Name|Type|isRequired|Description
 -|-|-|-
-onSorted|Function (list)=>{}||拖拽排序的回调
+onSorted|Function (list)=>{}|true|拖拽排序的回调
 className|String||自定义className
 
 其他属性比如action、fileList、onChange等等，同antd的Upload组件相同

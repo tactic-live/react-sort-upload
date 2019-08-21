@@ -165,7 +165,7 @@ UploadImg.propTypes = {
   beforeUpload: PropTypes.func,
   onChange: PropTypes.func,
   onRemove: PropTypes.func,
-  onSorted: PropTypes.func,
+  onSorted: PropTypes.func.isRequired,
   fileList: PropTypes.arrayOf(PropTypes.object),
   className: PropTypes.string
 };
